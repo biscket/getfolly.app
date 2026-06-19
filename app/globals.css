@@ -1,0 +1,203 @@
+@import "tailwindcss";
+
+@theme {
+  --color-folly-soft: #F0FDF4;
+  --color-folly-primary: #4ADE80;
+  --color-folly-deep: #16A34A;
+  --color-folly-dark: #0F7138;
+  --color-folly-charcoal: #1C1C1E;
+  --color-folly-muted: #6B7280;
+  --color-folly-border: #E5E7EB;
+  --color-folly-warm: #FEF3C7;
+  --color-folly-warm-dark: #F59E0B;
+
+  --font-heading: var(--font-jakarta), "Plus Jakarta Sans", sans-serif;
+  --font-body: var(--font-inter), "Inter", sans-serif;
+
+  --radius-xl: 1rem;
+  --radius-2xl: 1.5rem;
+  --radius-3xl: 2rem;
+}
+
+:root {
+  --background: #ffffff;
+  --foreground: #1C1C1E;
+  scroll-behavior: smooth;
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+body {
+  background: var(--background);
+  color: var(--foreground);
+  font-family: var(--font-body);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-family: var(--font-heading);
+}
+
+.font-heading {
+  font-family: var(--font-heading);
+}
+
+:focus-visible {
+  outline: 2px solid #4ADE80;
+  outline-offset: 2px;
+}
+
+::-webkit-scrollbar {
+  width: 6px;
+}
+
+::-webkit-scrollbar-track {
+  background: #F0FDF4;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #4ADE80;
+  border-radius: 9999px;
+}
+
+@keyframes float {
+
+  0%,
+  100% {
+    transform: translateY(0px) rotate(0deg);
+  }
+
+  50% {
+    transform: translateY(-10px) rotate(1deg);
+  }
+}
+
+@keyframes floatSlow {
+
+  0%,
+  100% {
+    transform: translateY(0px) rotate(0deg);
+  }
+
+  50% {
+    transform: translateY(-6px) rotate(-1deg);
+  }
+}
+
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes leafDrift {
+
+  0%,
+  100% {
+    transform: translate3d(-3%, 0, 0) rotate(-1deg);
+  }
+
+  50% {
+    transform: translate3d(3%, -8px, 0) rotate(1deg);
+  }
+}
+
+@keyframes scanLine {
+  0% {
+    transform: translateY(-120%);
+    opacity: 0;
+  }
+
+  15%,
+  80% {
+    opacity: 0.85;
+  }
+
+  100% {
+    transform: translateY(420%);
+    opacity: 0;
+  }
+}
+
+.animate-float {
+  animation: float 8s ease-in-out infinite;
+}
+
+.animate-float-slow {
+  animation: floatSlow 12s ease-in-out infinite;
+}
+
+.animate-fadeinup {
+  animation: fadeInUp 0.8s cubic-bezier(0.16, 1, 0.3, 1) both;
+}
+
+.animate-leaf-drift {
+  animation: leafDrift 14s ease-in-out infinite;
+}
+
+.animate-scan-line {
+  animation: scanLine 3.5s ease-in-out infinite;
+}
+
+.gradient-text {
+  background: linear-gradient(135deg, #0F7138 0%, #16A34A 40%, #4ADE80 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.glass {
+  background: rgba(255, 255, 255, 0.65);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1px solid rgba(255, 255, 255, 0.8);
+  box-shadow: 0 8px 32px rgba(22, 163, 74, 0.05);
+}
+
+.leaf-pattern {
+  background-image:
+    radial-gradient(circle at 15% 25%, rgba(74, 222, 128, 0.06), transparent 30%),
+    radial-gradient(circle at 85% 15%, rgba(245, 158, 11, 0.04), transparent 25%),
+    linear-gradient(120deg, rgba(15, 113, 56, 0.02) 0 1px, transparent 1px 100%);
+  background-size: auto, auto, 24px 24px;
+}
+
+.section-pad {
+  padding-top: 5.5rem;
+  padding-bottom: 5.5rem;
+}
+
+@media (min-width: 1024px) {
+  .section-pad {
+    padding-top: 7rem;
+    padding-bottom: 7rem;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
