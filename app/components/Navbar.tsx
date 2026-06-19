@@ -5,11 +5,11 @@ import Link from "next/link";
 import { Leaf, Menu, X } from "lucide-react";
 
 const NAV_LINKS = [
-  { label: "Smart Care", href: "#smart-care" },
-  { label: "Weather Watch", href: "#weather-watch" },
-  { label: "Checkup", href: "#checkup" },
-  { label: "Discover", href: "#discover" },
-  { label: "Pricing", href: "#pricing" },
+  { label: "Smart Care", href: "/#smart-care" },
+  { label: "Weather Watch", href: "/#weather-watch" },
+  { label: "Checkup", href: "/#checkup" },
+  { label: "Discover", href: "/#discover" },
+  { label: "Pricing", href: "/#pricing" },
 ];
 
 export default function Navbar() {
@@ -22,10 +22,8 @@ export default function Navbar() {
     return () => window.removeEventListener("scroll", onScroll);
   }, []);
 
-  const handleNav = (href: string) => {
+  const handleNav = () => {
     setOpen(false);
-    const el = document.querySelector(href);
-    el?.scrollIntoView({ behavior: "smooth" });
   };
 
   return (
@@ -53,23 +51,25 @@ export default function Navbar() {
 
         <div className="hidden md:flex items-center gap-5 lg:gap-8">
           {NAV_LINKS.map((link) => (
-            <button
+            <Link
               key={link.href}
-              onClick={() => handleNav(link.href)}
+              href={link.href}
+              onClick={handleNav}
               className="font-bold text-[#6B7280] hover:text-[#16A34A] transition-colors cursor-pointer focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#4ADE80] rounded-md px-1"
             >
               {link.label}
-            </button>
+            </Link>
           ))}
         </div>
 
         <div className="hidden md:flex items-center gap-3">
-          <button
-            onClick={() => handleNav("#waitlist")}
+          <Link
+            href="/#waitlist"
+            onClick={handleNav}
             className="px-6 py-2 rounded-full bg-gradient-to-b from-[#16A34A] to-[#159643] hover:from-[#159643] hover:to-[#0F7138] text-white font-semibold transition-all duration-300 shadow-md shadow-[#16A34A]/20 hover:shadow-lg hover:-translate-y-0.5 cursor-pointer focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-[#16A34A]"
           >
             Join waitlist
-          </button>
+          </Link>
         </div>
 
         <button
@@ -91,22 +91,24 @@ export default function Navbar() {
       >
         <div className="px-4 pb-4 pt-2">
           {NAV_LINKS.map((link) => (
-            <button
+            <Link
               key={link.href}
-              onClick={() => handleNav(link.href)}
+              href={link.href}
+              onClick={handleNav}
               tabIndex={open ? 0 : -1}
               className="block w-full text-left py-3 text-sm font-medium text-[#6B7280] hover:text-[#16A34A] border-b border-[#F0FDF4] last:border-0 cursor-pointer focus-visible:outline-none focus-visible:text-[#16A34A]"
             >
               {link.label}
-            </button>
+            </Link>
           ))}
-          <button
-            onClick={() => handleNav("#waitlist")}
+          <Link
+            href="/#waitlist"
+            onClick={handleNav}
             tabIndex={open ? 0 : -1}
-            className="mt-3 w-full px-4 py-2.5 rounded-xl bg-gradient-to-b from-[#16A34A] to-[#159643] hover:from-[#159643] hover:to-[#0F7138] text-white text-sm font-semibold transition-all duration-300 shadow-md shadow-[#16A34A]/20 cursor-pointer focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-[#16A34A]"
+            className="mt-3 block text-center w-full px-4 py-2.5 rounded-xl bg-gradient-to-b from-[#16A34A] to-[#159643] hover:from-[#159643] hover:to-[#0F7138] text-white text-sm font-semibold transition-all duration-300 shadow-md shadow-[#16A34A]/20 cursor-pointer focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-[#16A34A]"
           >
             Join waitlist
-          </button>
+          </Link>
         </div>
       </div>
     </header>
