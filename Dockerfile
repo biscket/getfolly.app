@@ -1,14 +1,16 @@
-# ── Stage 1: deps ─────────────────────────────────────────────────────────────
+# ── Stage 1: deps (production only, for the final runner) ─────────────────────
 FROM node:20-alpine AS deps
 RUN apk add --no-cache libc6-compat
 WORKDIR /app
 COPY package.json package-lock.json* ./
 RUN npm ci --omit=dev
 
-# ── Stage 2: builder ──────────────────────────────────────────────────────────
+# ── Stage 2: builder (all deps, including devDependencies for build) ──────────
 FROM node:20-alpine AS builder
+RUN apk add --no-cache libc6-compat
 WORKDIR /app
-COPY --from=deps /app/node_modules ./node_modules
+COPY package.json package-lock.json* ./
+RUN npm ci
 COPY . .
 
 # Build-time env vars (non-secret)

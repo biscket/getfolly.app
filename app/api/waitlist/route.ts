@@ -1,7 +1,13 @@
 import { NextRequest, NextResponse } from "next/server";
 import { Resend } from "resend";
 
-const resend = new Resend(process.env.RESEND_API_KEY);
+let _resend: Resend | null = null;
+function getResend() {
+  if (!_resend) {
+    _resend = new Resend(process.env.RESEND_API_KEY);
+  }
+  return _resend;
+}
 const rateLimitMap = new Map<string, number>();
 
 setInterval(
@@ -124,6 +130,7 @@ export async function POST(req: NextRequest) {
   const year = new Date().getFullYear();
 
   try {
+    const resend = getResend();
     const [confirmResult] = await Promise.allSettled([
       resend.emails.send({
         from: "Folly Plant Care <hello@getfolly.app>",
